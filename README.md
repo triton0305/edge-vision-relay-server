@@ -102,4 +102,4 @@ USB Webcam → Raspberry Pi Client → TCP → Windows/WSL Relay Server → SQLi
 
 ## Traffic Feature Decision
 
-개발 중 Client의 Tracking·기준선 통과·5초 `traffic_count` 전송을 구현하고 E2E로 검증했습니다. 이후 데이터 의미와 Client/Server 책임을 다시 정해 객체별 Detection 이력을 최종 운영 데이터로 확정했습니다. 현재 Relay Server의 수신·저장 경로는 `vision`만 지원합니다.
+개발 중 Client의 Tracking·기준선 통과·5초 `traffic_count` 전송을 구현하고 E2E로 검증했습니다. 이후 테스트 결과와 데이터 활용 목적을 검토해, 객체별 Detection 이력을 최종 운영 데이터로 확정했습니다. 현재 Relay Server의 수신·저장 경로는 `vision`만 지원합니다.
