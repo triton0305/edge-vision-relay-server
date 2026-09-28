@@ -81,42 +81,11 @@ static const char* save_vision(sqlite3* db, const ProtocolMessage* message)
   return result == SQLITE_DONE ? NULL : "database_error";
 }
 
-static const char* save_count(sqlite3* db, const ProtocolMessage* message)
-{
-  const TrafficCountData* count = &message->traffic_count;
-  const char* sql = "INSERT OR IGNORE INTO traffic_counts "
-    "(message_id,device_id,period_start_ms,period_end_ms,car_count,"
-    "motorcycle_count,bus_count,truck_count) VALUES (?,?,?,?,?,?,?,?)";
-  sqlite3_stmt* stmt = NULL;
-
-  if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK)
-  {
-    return "database_error";
-  }
-
-  sqlite3_bind_text(stmt, 1, message->message_id, -1, SQLITE_TRANSIENT);
-  sqlite3_bind_text(stmt, 2, message->device_id, -1, SQLITE_TRANSIENT);
-  sqlite3_bind_int64(stmt, 3, count->period_start_ms);
-  sqlite3_bind_int64(stmt, 4, count->period_end_ms);
-  sqlite3_bind_int64(stmt, 5, count->car_count);
-  sqlite3_bind_int64(stmt, 6, count->motorcycle_count);
-  sqlite3_bind_int64(stmt, 7, count->bus_count);
-  sqlite3_bind_int64(stmt, 8, count->truck_count);
-  int result = sqlite3_step(stmt);
-  sqlite3_finalize(stmt);
-  return result == SQLITE_DONE ? NULL : "database_error";
-}
-
 const char* database_save(sqlite3* db, const ProtocolMessage* message)
 {
   if (message->type == MESSAGE_VISION)
   {
     return save_vision(db, message);
-  }
-
-  if (message->type == MESSAGE_TRAFFIC_COUNT)
-  {
-    return save_count(db, message);
   }
 
   return "database_error";

@@ -78,22 +78,6 @@ static const char* parse_vision(const cJSON* data, VisionData* vision)
   return NULL;
 }
 
-static const char* parse_count(const cJSON* data, TrafficCountData* count)
-{
-  if (get_integer(data, "period_start_ms", &count->period_start_ms) ||
-      get_integer(data, "period_end_ms", &count->period_end_ms) ||
-      count->period_end_ms <= count->period_start_ms ||
-      get_integer(data, "car_count", &count->car_count) ||
-      get_integer(data, "motorcycle_count", &count->motorcycle_count) ||
-      get_integer(data, "bus_count", &count->bus_count) ||
-      get_integer(data, "truck_count", &count->truck_count))
-  {
-    return "invalid_data";
-  }
-
-  return NULL;
-}
-
 const char* protocol_parse(const char* payload, size_t length,
                            ProtocolMessage* message)
 {
@@ -137,11 +121,6 @@ const char* protocol_parse(const char* payload, size_t length,
       {
         message->type = MESSAGE_VISION;
         error = parse_vision(data, &message->vision);
-      }
-      else if (strcmp(type, "traffic_count") == 0)
-      {
-        message->type = MESSAGE_TRAFFIC_COUNT;
-        error = parse_count(data, &message->traffic_count);
       }
       else
       {

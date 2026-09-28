@@ -6,8 +6,7 @@
 
 typedef enum
 {
-  MESSAGE_VISION,
-  MESSAGE_TRAFFIC_COUNT
+  MESSAGE_VISION
 } MessageType;
 
 typedef struct
@@ -23,15 +22,6 @@ typedef struct
   int64_t bbox_height;
 } VisionData;
 
-typedef struct
-{
-  int64_t period_start_ms;
-  int64_t period_end_ms;
-  int64_t car_count;
-  int64_t motorcycle_count;
-  int64_t bus_count;
-  int64_t truck_count;
-} TrafficCountData;
 
 typedef struct
 {
@@ -39,7 +29,6 @@ typedef struct
   char* message_id;
   char* device_id;
   VisionData vision;
-  TrafficCountData traffic_count;
 } ProtocolMessage;
 
 const char* protocol_parse(const char* payload, size_t length,
