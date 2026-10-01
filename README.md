@@ -1,4 +1,4 @@
-# Edge Vision Relay Server
+# Raspberry Pi Edge Vision Relay Server
 
 [Raspberry Pi Edge Vision Client](https://github.com/triton0305/raspberry-pi-edge-vision)를 독립적으로 실행·검증하기 위한 C11 TCP 테스트 서버입니다. 객체별 `vision` JSON을 검증해 SQLite `detections`에 저장하고 ACK를 반환합니다. 팀프로젝트의 기본 연동 상대는 팀원이 개발한 Server이며, 이 저장소는 Client의 통신과 저장 동작을 별도 환경에서 재현합니다.
 
