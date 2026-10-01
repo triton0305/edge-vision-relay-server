@@ -68,8 +68,8 @@ sudo apt install -y build-essential cmake libcjson-dev libsqlite3-dev
 Repository 루트에서 빌드하고 실행합니다.
 
 ```bash
-git clone https://github.com/triton0305/edge-vision-relay-server.git
-cd edge-vision-relay-server
+git clone https://github.com/triton0305/pi-edge-vision-relay-server.git
+cd pi-edge-vision-relay-server
 cmake -S . -B build
 cmake --build build -j
 mkdir -p data
